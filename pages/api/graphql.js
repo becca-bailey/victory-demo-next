@@ -7,6 +7,11 @@ const typeDefs = gql`
     value: String
   }
 
+  type XY {
+    x: Float!
+    y: Float!
+  }
+
   type PopulationData {
     country: String!
     values: [YearValue!]!
@@ -14,6 +19,7 @@ const typeDefs = gql`
 
   type Query {
     populationData: [PopulationData!]!
+    randomXY(count: Int!): [XY!]!
   }
 `;
 
@@ -21,6 +27,16 @@ const resolvers = {
   Query: {
     populationData: () => {
       return populationData;
+    },
+    randomXY: (_, { count }) => {
+      const random = [];
+      for (let i = 0; i < count; i++) {
+        random.push({
+          x: Math.random(),
+          y: Math.random(),
+        });
+      }
+      return random;
     },
   },
 };
