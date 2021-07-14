@@ -9,7 +9,6 @@ import {
   VictoryTooltip,
   VictoryVoronoiContainer,
 } from "victory";
-import * as d3 from "d3";
 import React, { Profiler } from "react";
 
 const query = `
@@ -56,18 +55,13 @@ export default function Population() {
 
   const populationData = data?.populationData;
 
-  const scale = d3
-    .scaleSequential()
-    .domain([0, populationData?.length])
-    .interpolator(d3.interpolateRainbow);
-
   return (
     <div className={styles.container}>
       {fetching && "Loading..."}
       {populationData && (
         <VictoryChart
           height={250}
-          containerComponent={<VictoryVoronoiContainer />}
+          containerComponent={<VictoryVoronoiContainer voronoiDimension="x" />}
           domain={{ x: [1960, 2020], y: [0, 7673533972] }}
         >
           {populationData.map(({ country, values }, i) => {
@@ -79,13 +73,8 @@ export default function Population() {
                   y: value && parseInt(value),
                   country,
                 }))}
-                style={{
-                  data: {
-                    stroke: scale(i),
-                  },
-                }}
-                labels={({ datum }) => `${datum.country} - ${datum.y}`}
-                labelComponent={<MemoizedTooltip />}
+                // labels={({ datum }) => `${datum.country} - ${datum.y}`}
+                // labelComponent={<MemoizedTooltip />}
               />
             );
           })}
@@ -94,7 +83,7 @@ export default function Population() {
             dependentAxis
             tickFormat={(value) => formatBigNumber(value)}
           />
-          {/* {data.populationData.map(({ country, values }) => {
+          {data.populationData.map(({ country, values }) => {
             return (
               <VictoryScatter
                 key={country}
@@ -105,7 +94,7 @@ export default function Population() {
                 dataComponent={<ConditionalPoint />}
               />
             );
-          })} */}
+          })}
         </VictoryChart>
       )}
     </div>

@@ -12,10 +12,10 @@
     "graphql": "^15.4.0",
     "next": "^10.2.3",
     "next-urql": "^2.1.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "react": "file:../../victory/node_modules/react",
+    "react-dom": "file:../../victory/node_modules/react-dom",
     "react-is": "^16.13.1",
     "urql": "^1.11.4",
-    "victory": "^35.4.3"
+    "victory": "file:../../victory/packages/victory"
   }
 }

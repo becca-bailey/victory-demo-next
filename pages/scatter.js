@@ -28,7 +28,7 @@ export default function Scatter() {
   const [{ error, fetching, data }] = useQuery({
     query,
     variables: {
-      count: 2000,
+      count: 1000,
     },
   });
 
