@@ -1,12 +1,13 @@
 import { useQuery } from "urql";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 import {
   VictoryChart,
-  VictoryScatter,
+  VictoryScatterDuplicate,
   VictoryTooltip,
   VictoryVoronoiContainer,
 } from "victory";
-import React, { Profiler } from "react";
+import React from "react";
+import { useRouter } from "next/router";
 
 const query = `
   query RandomXY($count: Int!) {
@@ -25,10 +26,12 @@ const MemoizedTooltip = React.memo((props) => {
 });
 
 export default function Scatter() {
+  const router = useRouter();
+  const { count } = router.query;
   const [{ error, fetching, data }] = useQuery({
     query,
     variables: {
-      count: 1000,
+      count: parseInt(count),
     },
   });
 
@@ -40,7 +43,7 @@ export default function Scatter() {
           containerComponent={<VictoryVoronoiContainer />}
           domain={{ x: [0, 1], y: [0, 1] }}
         >
-          <VictoryScatter
+          <VictoryScatterDuplicate
             data={data.randomXY}
             labelComponent={<MemoizedTooltip />}
             labels={data.randomXY.map(({ x, y }) => [x, y])}
