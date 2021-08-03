@@ -9,9 +9,10 @@ import {
   VictoryVoronoiContainer,
 } from "victory";
 import React from "react";
+import { useRouter } from "next/router";
 
 const query = `
-  query populationData($count: Int!) {
+  query populationData($count: Int) {
     populationData(count: $count) {
       country
       values {
@@ -32,21 +33,16 @@ function formatBigNumber(n) {
   }
 }
 
-// const ConditionalPoint = ({ active, ...rest }) => {
-//   if (!active) {
-//     return null;
-//   }
-//   return <Point {...rest} />;
-// };
-
 const MemoizedTooltip = React.memo((props) => {
   return <VictoryTooltip {...props} />;
 });
 
 export default function Population() {
+  const router = useRouter();
+  const { count } = router.query;
   const [{ error, fetching, data }] = useQuery({
     query,
-    variables: { count: 50 },
+    variables: { count },
   });
 
   const populationData = data?.populationData;
@@ -56,6 +52,7 @@ export default function Population() {
   return (
     <div className={styles.container}>
       {fetching && "Loading..."}
+      {error && error.message}
       {populationData && (
         <VictoryChart
           height={250}

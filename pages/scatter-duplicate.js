@@ -1,8 +1,8 @@
 import { useQuery } from "urql";
-import styles from "../../styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 import {
   VictoryChart,
-  VictoryScatter,
+  VictoryScatterDuplicate as VictoryScatter,
   VictoryTooltip,
   VictoryVoronoiContainer,
 } from "victory";
@@ -10,8 +10,8 @@ import React from "react";
 import { useRouter } from "next/router";
 
 const query = `
-  query RandomXY($count: Int!) {
-    randomXY(count: $count) {
+  query RandomXY($count: Int!, $multiplier: Int) {
+    randomXY(count: $count, multiplier: $multiplier) {
       x
       y
     }
@@ -19,28 +19,29 @@ const query = `
 `;
 
 const MemoizedTooltip = React.memo((props) => {
-  // if (!props.active) {
-  //   return null;
-  // }
   return <VictoryTooltip {...props} />;
 });
 
 export default function Scatter() {
   const router = useRouter();
+  const { count = 0, multiplier = 1 } = router.query;
   const [{ error, fetching, data }] = useQuery({
     query,
     variables: {
-      count: 2000,
+      count: parseInt(count),
+      multiplier: parseInt(multiplier),
     },
+    enbled: !!count,
   });
 
   return (
     <div className={styles.container}>
       {fetching && "Loading..."}
+      {error && error.message}
       {data && (
         <VictoryChart
           containerComponent={<VictoryVoronoiContainer />}
-          domain={{ x: [0, 1], y: [0, 1] }}
+          domain={{ x: [0, multiplier], y: [0, multiplier] }}
         >
           <VictoryScatter
             data={data.randomXY}

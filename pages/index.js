@@ -9,7 +9,10 @@ export default function Home() {
           <Link href="/population">Population</Link>
         </li>
         <li>
-          <Link href="/scatter">Scatter</Link>
+          <Link href="/scatter?count=1000">Scatter</Link>
+        </li>
+        <li>
+          <Link href="/scatter-duplicate?count=1000">Scatter Duplicate</Link>
         </li>
       </ul>
     </div>

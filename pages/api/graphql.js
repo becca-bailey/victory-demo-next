@@ -19,22 +19,25 @@ const typeDefs = gql`
   }
 
   type Query {
-    populationData(count: Int!): [PopulationData!]!
-    randomXY(count: Int!): [XY!]!
+    populationData(count: Int): [PopulationData!]!
+    randomXY(count: Int!, multiplier: Int): [XY!]!
   }
 `;
 
 const resolvers = {
   Query: {
     populationData: (_, { count }) => {
-      return sampleSize(data.populationData, count);
+      if (count) {
+        return sampleSize(data.populationData, count);
+      }
+      return data.populationData;
     },
-    randomXY: (_, { count }) => {
+    randomXY: (_, { count, multiplier = 1 }) => {
       const random = [];
       for (let i = 0; i < count; i++) {
         random.push({
-          x: Math.random(),
-          y: Math.random(),
+          x: Math.random() * multiplier,
+          y: Math.random() * multiplier,
         });
       }
       return random;
