@@ -1,10 +1,9 @@
 import { useQuery } from "urql";
 import styles from "../styles/Home.module.css";
 import {
-  Point,
   VictoryAxis,
   VictoryChart,
-  VictoryLine,
+  VictoryLineDuplicate as VictoryLine,
   VictoryTooltip,
   VictoryVoronoiContainer,
 } from "victory";

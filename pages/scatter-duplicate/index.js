@@ -26,12 +26,10 @@ const MemoizedTooltip = React.memo((props) => {
 });
 
 export default function Scatter() {
-  const router = useRouter();
-  const { count } = router.query;
   const [{ error, fetching, data }] = useQuery({
     query,
     variables: {
-      count: parseInt(count),
+      count: 2000,
     },
   });
 

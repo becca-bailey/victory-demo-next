@@ -1,5 +1,6 @@
 import { ApolloServer, gql } from "apollo-server-micro";
-import { populationData } from "../../public/population-data.json";
+import data from "../../public/population-data.json";
+import { sampleSize } from "lodash";
 
 const typeDefs = gql`
   type YearValue {
@@ -18,15 +19,15 @@ const typeDefs = gql`
   }
 
   type Query {
-    populationData: [PopulationData!]!
+    populationData(count: Int!): [PopulationData!]!
     randomXY(count: Int!): [XY!]!
   }
 `;
 
 const resolvers = {
   Query: {
-    populationData: () => {
-      return populationData;
+    populationData: (_, { count }) => {
+      return sampleSize(data.populationData, count);
     },
     randomXY: (_, { count }) => {
       const random = [];

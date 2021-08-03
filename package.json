@@ -10,6 +10,7 @@
   "dependencies": {
     "apollo-server-micro": "^2.19.0",
     "graphql": "^15.4.0",
+    "lodash": "^4.17.21",
     "next": "^10.2.3",
     "next-urql": "^2.1.1",
     "react": "file:../../victory/node_modules/react",
