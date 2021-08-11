@@ -15,7 +15,7 @@ export default function Home() {
           <Link href="/scatter-duplicate?count=1000">Scatter Duplicate</Link>
         </li>
         <li>
-          g<Link href="/line?count=100&groups=100">Line</Link>
+          <Link href="/line?count=100&groups=100">Line</Link>
         </li>
       </ul>
     </div>

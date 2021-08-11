@@ -11,8 +11,8 @@ import React from "react";
 import { useRouter } from "next/router";
 
 const query = `
-  query RandomBarGroups($count: Int!, $groups: Int, $multiplier: Int) {
-    randomBarGroups(count: $count, groups: $groups, multiplier: $multiplier) {
+  query randomGroups($count: Int!, $groups: Int, $multiplier: Int) {
+    randomGroups(count: $count, groups: $groups, multiplier: $multiplier) {
       x
       y
     }
@@ -44,7 +44,7 @@ export default function Bar() {
           // domain={{ x: [0, multiplier], y: [0, multiplier] }}
         >
           <VictoryGroup colorScale="qualitative">
-            {data.randomBarGroups.map((group, i) => {
+            {data.randomGroups.map((group, i) => {
               return (
                 <VictoryBar
                   data={group}

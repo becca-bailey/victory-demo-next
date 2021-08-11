@@ -21,7 +21,7 @@ const typeDefs = gql`
   type Query {
     populationData(count: Int): [PopulationData!]!
     randomXY(count: Int!, multiplier: Int): [XY!]!
-    randomBarGroups(count: Int!, groups: Int, multiplier: Int): [[XY!]]!
+    randomGroups(count: Int!, groups: Int, multiplier: Int): [[XY!]]!
   }
 `;
 
@@ -43,7 +43,7 @@ const resolvers = {
       }
       return random;
     },
-    randomBarGroups: (_, { count, groups = 1, multiplier = 1 }) => {
+    randomGroups: (_, { count, groups = 1, multiplier = 1 }) => {
       const random = [];
       for (let i = 0; i < groups; i++) {
         let group = [];
