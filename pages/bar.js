@@ -3,9 +3,10 @@ import styles from "../styles/Home.module.css";
 import {
   VictoryBar,
   VictoryChart,
-  VictoryGroup,
+  VictoryStack,
   VictoryTooltip,
   VictoryVoronoiContainer,
+  VictoryGroup,
 } from "victory";
 import React from "react";
 import { useRouter } from "next/router";
@@ -32,8 +33,6 @@ export default function Bar() {
     enbled: !!count,
   });
 
-  console.log(data);
-
   return (
     <div className={styles.container}>
       {fetching && "Loading..."}
@@ -43,7 +42,7 @@ export default function Bar() {
           containerComponent={<VictoryVoronoiContainer />}
           // domain={{ x: [0, multiplier], y: [0, multiplier] }}
         >
-          <VictoryGroup colorScale="qualitative">
+          <VictoryStack animate colorScale="qualitative">
             {data.randomGroups.map((group, i) => {
               return (
                 <VictoryBar
@@ -54,7 +53,7 @@ export default function Bar() {
                 ></VictoryBar>
               );
             })}
-          </VictoryGroup>
+          </VictoryStack>
         </VictoryChart>
       )}
     </div>

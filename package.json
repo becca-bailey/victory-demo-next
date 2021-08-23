@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "next build --profile",
+    "start": "next start",
+    "prod": "npm run build && npm run start"
   },
   "dependencies": {
     "apollo-server-micro": "^2.19.0",
