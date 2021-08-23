@@ -17,6 +17,9 @@ export default function Home() {
         <li>
           <Link href="/line?count=100&groups=100">Line</Link>
         </li>
+        <li>
+          <Link href="/bar?count=100&groups=10">Bar</Link>
+        </li>
       </ul>
     </div>
   );

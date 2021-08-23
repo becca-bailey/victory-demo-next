@@ -6,10 +6,10 @@ import {
   VictoryStack,
   VictoryTooltip,
   VictoryVoronoiContainer,
-  VictoryGroup,
 } from "victory";
 import React from "react";
 import { useRouter } from "next/router";
+import { parseBool } from "../utilities/parseBool";
 
 const query = `
   query randomGroups($count: Int!, $groups: Int, $multiplier: Int) {
@@ -22,7 +22,13 @@ const query = `
 
 export default function Bar() {
   const router = useRouter();
-  const { count = 0, multiplier = 1, groups = 1 } = router.query;
+  const {
+    count = 0,
+    multiplier = 1,
+    groups = 1,
+    animate: animateString,
+  } = router.query;
+  const animate = parseBool(animateString);
   const [{ error, fetching, data }] = useQuery({
     query,
     variables: {
@@ -42,7 +48,7 @@ export default function Bar() {
           containerComponent={<VictoryVoronoiContainer />}
           // domain={{ x: [0, multiplier], y: [0, multiplier] }}
         >
-          <VictoryStack animate colorScale="qualitative">
+          <VictoryStack animate={animate} colorScale="qualitative">
             {data.randomGroups.map((group, i) => {
               return (
                 <VictoryBar

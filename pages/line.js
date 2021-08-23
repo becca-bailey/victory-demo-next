@@ -8,6 +8,7 @@ import {
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import { useQuery } from "urql";
+import { parseBool } from "../utilities/parseBool";
 
 const query = `
   query randomGroups($count: Int!, $groups: Int, $multiplier: Int) {
@@ -24,8 +25,9 @@ export default function Line() {
     count = 0,
     multiplier = 1,
     groups = 1,
-    animate = false,
+    animate: animateString,
   } = router.query;
+  const animate = parseBool(animateString);
   const [{ error, fetching, data }, reexecuteQuery] = useQuery({
     query,
     variables: {
