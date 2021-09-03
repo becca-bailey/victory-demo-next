@@ -39,16 +39,13 @@ export default function Scatter() {
       {fetching && "Loading..."}
       {error && error.message}
       {data && (
-        <VictoryChart
+        <VictoryScatter
           containerComponent={<VictoryVoronoiContainer />}
           domain={{ x: [0, multiplier], y: [0, multiplier] }}
-        >
-          <VictoryScatter
-            data={data.randomXY}
-            labelComponent={<MemoizedTooltip />}
-            labels={data.randomXY.map(({ x, y }) => [x, y])}
-          />
-        </VictoryChart>
+          data={data.randomXY}
+          labelComponent={<MemoizedTooltip />}
+          labels={data.randomXY.map(({ x, y }) => [x, y])}
+        />
       )}
     </div>
   );
