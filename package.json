@@ -13,12 +13,12 @@
     "apollo-server-micro": "^2.19.0",
     "graphql": "^15.4.0",
     "lodash": "^4.17.21",
-    "next": "^10.2.3",
+    "next": "^11.1.2",
     "next-urql": "^2.1.1",
-    "react": "file:../../victory/node_modules/react",
-    "react-dom": "file:../../victory/node_modules/react-dom",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-is": "^16.13.1",
     "urql": "^1.11.4",
-    "victory": "file:../../victory/packages/victory"
+    "victory": "^35.11.1"
   }
 }
