@@ -1,2 +1,4 @@
-command = "npm run build && npm run export"
-publish = "out"
+
+[build]
+  command = "npm run build"
+  publish = "out"
